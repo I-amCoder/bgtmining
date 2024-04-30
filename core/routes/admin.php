@@ -10,7 +10,7 @@ Route::namespace('Auth')->group(function () {
     });
 
     // Admin Password Reset
-    Route::controller('ForgotPasswordController')->prefix('password')->name('password.')->group(function(){
+    Route::controller('ForgotPasswordController')->prefix('password')->name('password.')->group(function () {
         Route::get('reset', 'showLinkRequestForm')->name('reset');
         Route::post('reset', 'sendResetCodeEmail');
         Route::get('code-verify', 'codeVerify')->name('code.verify');
@@ -72,14 +72,14 @@ Route::middleware('admin')->group(function () {
         Route::get('notification-log/{id}', 'notificationLog')->name('notification.log');
     });
 
-      // Subscriber
-      Route::controller('SubscriberController')->prefix('subscriber')->name('subscriber.')->group(function () {
+    // Subscriber
+    Route::controller('SubscriberController')->prefix('subscriber')->name('subscriber.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('send-email', 'sendEmailForm')->name('send.email');
         Route::post('remove/{id}', 'remove')->name('remove');
         Route::post('send-email', 'sendEmail')->name('send.email');
     });
-    
+
 
     //Crypto Currency
     Route::controller('CryptoCurrencyController')->group(function () {
@@ -148,7 +148,7 @@ Route::middleware('admin')->group(function () {
     });
 
     // DEPOSIT SYSTEM
-    Route::controller('DepositController')->prefix('deposit')->name('deposit.')->group(function(){
+    Route::controller('DepositController')->prefix('deposit')->name('deposit.')->group(function () {
         Route::get('/', 'deposit')->name('list');
         Route::get('details/{id}', 'details')->name('details');
         Route::post('reject', 'reject')->name('reject');
@@ -170,7 +170,7 @@ Route::middleware('admin')->group(function () {
     });
 
     // Report
-    Route::controller('ReportController')->prefix('report')->name('report.')->group(function(){
+    Route::controller('ReportController')->prefix('report')->name('report.')->group(function () {
         Route::get('transaction', 'transaction')->name('transaction');
         Route::get('login/history', 'loginHistory')->name('login.history');
         Route::get('login/ipHistory/{ip}', 'loginIpHistory')->name('login.ipHistory');
@@ -179,7 +179,7 @@ Route::middleware('admin')->group(function () {
     });
 
     // Admin Support
-    Route::controller('SupportTicketController')->prefix('ticket')->name('ticket.')->group(function(){
+    Route::controller('SupportTicketController')->prefix('ticket')->name('ticket.')->group(function () {
         Route::get('/', 'tickets')->name('index');
         Route::get('pending', 'pendingTicket')->name('pending');
         Route::get('closed', 'closedTicket')->name('closed');
@@ -192,7 +192,7 @@ Route::middleware('admin')->group(function () {
     });
 
     // Language Manager
-    Route::controller('LanguageController')->prefix('language')->name('language.')->group(function(){
+    Route::controller('LanguageController')->prefix('language')->name('language.')->group(function () {
         Route::get('/', 'langManage')->name('manage');
         Route::post('/', 'langStore')->name('manage.store');
         Route::post('delete/{id}', 'langDelete')->name('manage.delete');
@@ -266,7 +266,7 @@ Route::middleware('admin')->group(function () {
     });
 
     // Plugin
-    Route::controller('ExtensionController')->prefix('extensions')->name('extensions.')->group(function(){
+    Route::controller('ExtensionController')->prefix('extensions')->name('extensions.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('update/{id}', 'update')->name('update');
         Route::post('status/{id}', 'status')->name('status');
@@ -278,8 +278,8 @@ Route::middleware('admin')->group(function () {
         Route::get('server-info', 'systemServerInfo')->name('server.info');
         Route::get('optimize', 'optimize')->name('optimize');
         Route::get('optimize-clear', 'optimizeClear')->name('optimize.clear');
-        Route::get('system-update','systemUpdate')->name('update');
-        Route::post('update-upload','updateUpload')->name('update.upload');
+        Route::get('system-update', 'systemUpdate')->name('update');
+        Route::post('update-upload', 'updateUpload')->name('update.upload');
     });
 
     //Cron Configuration
@@ -322,5 +322,12 @@ Route::middleware('admin')->group(function () {
             Route::get('manage-section/{id}', 'manageSection')->name('manage.section');
             Route::post('manage-section/{id}', 'manageSectionUpdate')->name('manage.section.update');
         });
+    });
+
+    Route::name('plans.')->prefix('manage-plans')->controller('MiningPlansController')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::put('/update/{plan}', 'update')->name('update');
+        Route::delete('/delete/{plan}', 'delete')->name('delete');
     });
 });
