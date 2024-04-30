@@ -32,7 +32,7 @@
                                                 data-return_type="{{ $plan->return_type }}"
                                                 class="btn btn-outline-warning btn-sm edit-plan"><i
                                                     class="fa fa-edit"></i></button>
-                                            <button class="btn btn-outline-danger btn-sm"><i
+                                            <button data-href="{{ route('admin.plans.delete',$plan->id) }}" class="btn btn-outline-danger btn-sm delete-plan"><i
                                                     class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -55,7 +55,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="planModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="planModalLabel">Plan Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
@@ -114,17 +114,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deletePlanModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="deletePlanModalLabel">Delete Plan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST">
                     @csrf
+                    @method('delete')
                     <div class="modal-body">
-                        <input type="hidden" name="_method">
+                        <p>Are you sure to delete this plan</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Delete Plan</button>
                     </div>
                 </form>
             </div>
@@ -155,6 +156,13 @@
             modal.find('input[name=price]').val($(this).data('price'));
             modal.find('input[name=return_interest]').val($(this).data('return_interest'));
             modal.find('select[name=return_type]').val($(this).data('return_type'));
+            modal.modal('show');
+        });
+
+        $(".delete-plan").click(function (e) {
+            e.preventDefault();
+            let modal = $("#deletePlanModal");
+            modal.find('form').attr('action', $(this).data('href'));
             modal.modal('show');
         });
     </script>

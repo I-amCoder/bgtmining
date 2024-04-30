@@ -52,7 +52,11 @@ class MiningPlansController extends Controller
         return back()->withNotify($notify);
     }
 
-    public function  delete()
+    public function  delete($id)
     {
+        $plan = MiningPlan::findOrFail($id);
+        $plan->delete();
+        $notify[] = ['success', 'Plan Deleted successfully'];
+        return back()->withNotify($notify);
     }
 }
