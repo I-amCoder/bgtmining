@@ -330,4 +330,11 @@ Route::middleware('admin')->group(function () {
         Route::put('/update/{plan}', 'update')->name('update');
         Route::delete('/delete/{plan}', 'delete')->name('delete');
     });
+
+
+    Route::group(['as' => 'plan_deposit.', 'controller' => 'PlanDepositController', 'prefix' => 'manage-plan-deposits'], function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/approve', 'approve')->name('approve');
+        Route::post('/reject', 'reject')->name('reject');
+    });
 });

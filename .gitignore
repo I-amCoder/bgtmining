@@ -1,0 +1,4 @@
+core/vendor
+*.sql
+queries.md
+core/.env

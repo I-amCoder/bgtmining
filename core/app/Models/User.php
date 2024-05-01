@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','ver_code','balance','kyc_data'
+        'password', 'remember_token', 'ver_code', 'balance', 'kyc_data'
     ];
 
     /**
@@ -32,7 +32,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'address' => 'object',
         'kyc_data' => 'object',
-        'ver_code_send_at' => 'datetime'
+        'ver_code_send_at' => 'datetime',
+        'next_mining_time' => 'datetime'
     ];
 
     public function loginLogs()
@@ -62,6 +63,11 @@ class User extends Authenticatable
         );
     }
 
+    public function mining_plan()
+    {
+        return $this->belongsTo(MiningPlan::class);
+    }
+
     public function advertisements()
     {
         return $this->hasMany(Advertisement::class);
@@ -89,10 +95,11 @@ class User extends Authenticatable
 
     public function referrals()
     {
-        return $this->hasMany(User::class,'ref_by');
+        return $this->hasMany(User::class, 'ref_by');
     }
 
-    public function allReferrals(){
+    public function allReferrals()
+    {
 
         return $this->referrals()->with('refBy');
     }
@@ -120,7 +127,7 @@ class User extends Authenticatable
     // SCOPES
     public function scopeActive($query)
     {
-        return $query->where('status', Status::USER_ACTIVE)->where('ev',Status::VERIFIED)->where('sv',Status::VERIFIED);
+        return $query->where('status', Status::USER_ACTIVE)->where('ev', Status::VERIFIED)->where('sv', Status::VERIFIED);
     }
 
     public function scopeBanned($query)
