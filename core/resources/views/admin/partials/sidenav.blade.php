@@ -194,6 +194,13 @@
                         <span class="menu-title">@lang('Manage Plans')</span>
                     </a>
                 </li>
+                <li class="sidebar-menu-item {{ menuActive('admin.payment_method*') }}">
+                    <a href="{{ route('admin.payment_method.index') }}" class="nav-link ">
+                        <i class="menu-icon lab la-bitcoin"></i>
+                        <span class="menu-title">@lang('Payment Methods')</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-menu-item {{ menuActive('admin.plan_deposit*') }}">
                     <a href="{{ route('admin.plan_deposit.index') }}" class="nav-link ">
                         <i class="menu-icon lab la-bitcoin"></i>

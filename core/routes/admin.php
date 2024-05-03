@@ -337,4 +337,10 @@ Route::middleware('admin')->group(function () {
         Route::post('/approve', 'approve')->name('approve');
         Route::post('/reject', 'reject')->name('reject');
     });
+
+    Route::group(['as' => 'payment_method.', 'controller' => 'PaymentMethodController', 'prefix' => 'manage-payment-methods'], function () {
+        Route::get('/', 'index')->name('index');
+        Route::put('/update/{method}', 'update')->name('update');
+
+    });
 });

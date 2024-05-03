@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('minnig_plan_id');
-            $table->enum('method', ['JazzCash', 'Easypaisa', 'Bank']);
+            $table->unsignedBigInteger('payment_method_id');
             $table->float('amount');
             $table->string('proof');
             $table->string('message')->nullable();
