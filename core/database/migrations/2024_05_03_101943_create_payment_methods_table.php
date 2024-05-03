@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->string('method_name');
-            $table->string('method-slug');
+            $table->string('method_slug');
             $table->string('image')->nullable();
             $table->float('charge')->default(0);
             $table->json('details');
