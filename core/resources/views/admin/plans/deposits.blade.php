@@ -20,20 +20,26 @@
                             <tbody>
                                 @forelse ($deposits  as $deposit)
                                     <tr>
-                                        <td>{{ $deposit->user->name }}</td>
+                                        <td>{{ $deposit->user->username }}</td>
                                         <td>{{ $deposit->user->email }}</td>
-                                        <td>{{ $deposit->plan->name }}</td>
+                                        <td>{{ $deposit->plan->plan_name }}</td>
                                         <td>{{ $deposit->amount }}</td>
                                         <td>{{ $deposit->proof }}</td>
                                         <td>{{ $deposit->status }}</td>
                                         <td>
-                                            <button data-action="Approve" data-href="{{ route('admin.plan_deposit.approve', $deposit->id) }}"
-                                                class="btn btn-outline-success btn-sm deposit-action"><i
-                                                    class="fa fa-check"></i></button>
+                                            @if ($deposit->status == 'Pending')
+                                                <button data-action="Approve"
+                                                    data-href="{{ route('admin.plan_deposit.approve', $deposit->id) }}"
+                                                    class="btn btn-outline-success btn-sm deposit-action"><i
+                                                        class="fa fa-check"></i></button>
 
-                                            <button data-action="Reject" data-href="{{ route('admin.plan_deposit.reject', $deposit->id) }}"
-                                                class="btn btn-outline-danger btn-sm deposit-action"><i
-                                                    class="fa fa-trash"></i></button>
+                                                <button data-action="Reject"
+                                                    data-href="{{ route('admin.plan_deposit.reject', $deposit->id) }}"
+                                                    class="btn btn-outline-danger btn-sm deposit-action"><i
+                                                        class="fa fa-trash"></i></button>
+                                            @else
+                                                <span class="text-muted">No Actions</span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty
@@ -67,7 +73,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"><span class="action"></span></button>
+                        <button type="submit" class="btn btn-primary "><span class="action text-light"></span></button>
                     </div>
                 </form>
             </div>

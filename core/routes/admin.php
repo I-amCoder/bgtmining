@@ -334,13 +334,12 @@ Route::middleware('admin')->group(function () {
 
     Route::group(['as' => 'plan_deposit.', 'controller' => 'PlanDepositController', 'prefix' => 'manage-plan-deposits'], function () {
         Route::get('/', 'index')->name('index');
-        Route::post('/approve', 'approve')->name('approve');
-        Route::post('/reject', 'reject')->name('reject');
+        Route::post('/approve/{id}', 'approve')->name('approve');
+        Route::post('/reject/{id}', 'reject')->name('reject');
     });
 
     Route::group(['as' => 'payment_method.', 'controller' => 'PaymentMethodController', 'prefix' => 'manage-payment-methods'], function () {
         Route::get('/', 'index')->name('index');
         Route::put('/update/{method}', 'update')->name('update');
-
     });
 });

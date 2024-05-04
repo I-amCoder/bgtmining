@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('plan_deposits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('minnig_plan_id');
+            $table->unsignedBigInteger('mining_plan_id');
             $table->unsignedBigInteger('payment_method_id');
             $table->float('amount');
             $table->string('proof');

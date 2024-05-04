@@ -23,9 +23,9 @@
                         @if (auth()->user()->plan_id == $plan->id)
                             <span class="text-success">Current Plan</span>
                         @else
-                            <button class="btn btn-success ">
+                            <a href="{{ route('user.mining.plans.buy', $plan->id) }}" class="btn btn-success ">
                                 Buy
-                            </button>
+                            </a>
                         @endif
                     </div>
                 </div>

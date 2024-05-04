@@ -16,6 +16,6 @@ class PlanDeposit extends Model
 
     public function plan()
     {
-        return $this->belongsTo(MiningPlan::class);
+        return $this->belongsTo(MiningPlan::class, 'mining_plan_id', 'id');
     }
 }
