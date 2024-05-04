@@ -46,7 +46,7 @@ class MiningController extends Controller
     public function buyPlanProcess(Request $request, $id)
     {
         if ($request->hasFile('slip')) {
-            $slip = fileUploader($request->file('slip'), 'payment_slips');
+            $slip = fileUploader($request->file('slip'), 'assets/images/payment_slips');
             $method = PaymentMethod::where('method_slug', $request->method)->firstOrFail();
 
             $plan = MiningPlan::findOrFail($id);

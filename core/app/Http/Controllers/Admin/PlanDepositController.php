@@ -12,7 +12,7 @@ class PlanDepositController extends Controller
     public function index()
     {
         $pageTitle = "Manage Plan Deposits";
-        $deposits = PlanDeposit::all();
+        $deposits = PlanDeposit::latest()->get();
         return view('admin.plans.deposits', compact('deposits', 'pageTitle'));
     }
 

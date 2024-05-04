@@ -11,8 +11,8 @@
                                     <th>@lang('Username')</th>
                                     <th>@lang('Email')</th>
                                     <th>@lang('Plan')</th>
-                                    <th>@lang('Proof')</th>
                                     <th>@lang('Amount')</th>
+                                    <th>@lang('Proof')</th>
                                     <th>@lang('Status')</th>
                                     <th>@lang('Action')</th>
                                 </tr>
@@ -24,7 +24,12 @@
                                         <td>{{ $deposit->user->email }}</td>
                                         <td>{{ $deposit->plan->plan_name }}</td>
                                         <td>{{ $deposit->amount }}</td>
-                                        <td>{{ $deposit->proof }}</td>
+                                        <td>
+                                            <button data-path="{{ '/assets/images/payment_slips' . '/' . $deposit->proof }}"
+                                                class="btn btn-sm btn-info viewProof">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </td>
                                         <td>{{ $deposit->status }}</td>
                                         <td>
                                             @if ($deposit->status == 'Pending')
@@ -79,6 +84,25 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="depositProofModal" tabindex="-1" aria-labelledby="depositProofModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="depositProofModalLabel">Payment Proof</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <img style="width: 100%" alt="Proof">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('script')
@@ -90,5 +114,12 @@
             modal.find('.action').text($(this).data('action'));
             modal.modal('show');
         });
+
+        $(".viewProof").click(function(e) {
+            e.preventDefault();
+            let modal = $("#depositProofModal");
+            modal.find('img').attr('src', $(this).data('path'));
+            modal.modal('show');
+        })
     </script>
 @endpush
