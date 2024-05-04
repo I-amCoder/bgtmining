@@ -7,6 +7,12 @@
                 <span class="text">@lang('Dashboard')</span>
             </a>
         </li>
+        <li class="sidebar-menu-list__item {{ menuActive('user.mining.*') }}">
+            <a class="sidebar-menu-list__link" href="{{ route('user.mining.show') }}">
+                <span class="icon"><i class="lab la-bitcoin"></i></span>
+                <span class="text">@lang('Mining')</span>
+            </a>
+        </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.profile.setting') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.profile.setting') }}">
                 <span class="icon"><i class="las la-user-cog"></i></span>
@@ -27,13 +33,13 @@
         </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.withdraw.history') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.withdraw.history') }}">
-                
+
                 <span class="text"><i class="las la-hand-holding-usd"></i> @lang('Withdraw History')</span>
             </a>
         </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.deposit.history') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.deposit.history') }}">
-              
+
                 <span class="text"><i class="las la-wallet"></i> @lang('Deposits History')</span>
             </a>
         </li>
@@ -57,7 +63,7 @@
         </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.change.password') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.change.password') }}">
-              
+
                 <span class="text"><i class="la la-key"></i> @lang('Change Password')</span>
             </a>
         </li>

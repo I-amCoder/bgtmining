@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function mining_plan()
     {
-        return $this->belongsTo(MiningPlan::class);
+        return $this->belongsTo(MiningPlan::class, 'plan_id', 'id');
     }
 
     public function advertisements()

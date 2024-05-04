@@ -46,8 +46,16 @@ Route::middleware('auth')->name('user.')->group(function () {
 
         Route::middleware('registration.complete')->namespace('User')->group(function () {
 
+            Route::controller('MiningController')->group(function () {
+                Route::get('coin-mining', 'showMine')->name('mining.show');
+                Route::get('coin-mining/plans', 'plans')->name('mining.plans');
+                Route::post('coin-mining/earn', 'mine')->name('mining.earn');
+            });
+
             Route::controller('UserController')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
+
+
 
                 //2FA
                 Route::get('two-factor', 'show2faForm')->name('twofactor');
