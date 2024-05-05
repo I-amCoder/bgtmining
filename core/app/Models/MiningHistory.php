@@ -12,4 +12,9 @@ class MiningHistory extends Model
     protected $casts = [
         'next_mining_time' => 'datetime'
     ];
+
+    public function plan()
+    {
+        return $this->belongsTo(MiningPlan::class, 'plan_id', 'id');
+    }
 }

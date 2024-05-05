@@ -7,10 +7,16 @@
                 <span class="text">@lang('Dashboard')</span>
             </a>
         </li>
-        <li class="sidebar-menu-list__item {{ menuActive('user.mining.*') }}">
+        <li class="sidebar-menu-list__item {{ menuActive('user.mining.show') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.mining.show') }}">
                 <span class="icon"><i class="lab la-bitcoin"></i></span>
                 <span class="text">@lang('Mining')</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-list__item {{ menuActive('user.mining.history') }}">
+            <a class="sidebar-menu-list__link" href="{{ route('user.mining.history') }}">
+                <span class="icon"><i class="lab la-bitcoin"></i></span>
+                <span class="text">@lang('Mining History')</span>
             </a>
         </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.profile.setting') }}">

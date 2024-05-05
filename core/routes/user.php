@@ -48,6 +48,8 @@ Route::middleware('auth')->name('user.')->group(function () {
 
             Route::controller('MiningController')->group(function () {
                 Route::get('coin-mining', 'showMine')->name('mining.show');
+                Route::get('coin-mining/history', 'history')->name('mining.history');
+                Route::post('coin-mining/transfer', 'transfer')->name('mining.transfer');
                 Route::get('coin-mining/plans', 'plans')->name('mining.plans');
                 Route::get('coin-mining/plans/buy/{id}', 'buyPlan')->name('mining.plans.buy');
                 Route::post('coin-mining/plans/buy/{id}', 'buyPlanProcess')->name('mining.plans.buy');

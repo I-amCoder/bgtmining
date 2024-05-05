@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\CryptoCurrency;
 use App\Models\MiningHistory;
 use App\Models\MiningPlan;
 use App\Models\PaymentMethod;
 use App\Models\PlanDeposit;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +19,46 @@ class MiningController extends Controller
     {
         $pageTitle = "BGT Mining";
         return view($this->activeTemplate . 'user.mining.index', compact('pageTitle'));
+    }
+
+    public function history()
+    {
+        $pageTitle = "BGT Mining History";
+        $records = MiningHistory::latest()->get();
+        return view($this->activeTemplate . 'user.mining.history', compact('pageTitle', 'records'));
+    }
+
+    public function transfer(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric'
+        ]);
+
+        // Custom Validators
+        if ($request->amount > auth()->user()->mining_balance) {
+            return back()->withErrors(['amount' => 'Insufficient Mining Amount']);
+        }
+
+        $amount = $request->amount;
+
+
+        $currency = CryptoCurrency::where('symbol', 'BGT')->first();
+
+        if ($currency) {
+
+            $wallet = Wallet::where('user_id', auth()->id())->where('crypto_currency_id', $currency->id)->first();
+
+            if ($wallet) {
+                auth()->user()->mining_balance -= $amount;
+                $wallet->balance += $amount;
+
+                auth()->user()->save();
+                $wallet->save();
+
+                return back()->withNotify([['success', 'Balance Transfered Successfully']]);
+            }
+        }
+        return back()->withNotify([['error', 'Error while transferring balance']]);
     }
 
     public function plans()
