@@ -15,12 +15,12 @@
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-sm-6">
-                                        <label class="form--label">@lang('First Name')</label>
+                                        <label class="form--label">@lang('User Name')</label>
                                         <input type="text" class="form--control" name="firstname" value="{{ old('firstname') }}" required>
                                     </div>
 
                                     <div class="form-group col-sm-6">
-                                        <label class="form--label">@lang('Last Name')</label>
+                                        <label class="form--label">@lang('Father Name')</label>
                                         <input type="text" class="form--control" name="lastname" value="{{ old('lastname') }}" required>
                                     </div>
                                     <div class="form-group col-sm-6">

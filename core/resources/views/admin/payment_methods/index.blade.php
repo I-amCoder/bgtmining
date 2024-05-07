@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jazzcash_account_number" class="form-label">Account Number</label>
-                            <input value="{{ old('jazzcash_account_number', $jazzcash->details['account_number'] ?? '') }}"
+                            <input value="{{ old('jazzcash_account_number', $jazzcash->details['account_number'] ?? '40') }}"
                                 type="text" name="jazzcash_account_number" id="jazzcash_account_number"
                                 placeholder="Account Number" class="form-control">
                             @error('jazzcash_account_number')

@@ -18,13 +18,13 @@
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="form-group">
-                        <label class="form--label">@lang('First Name')</label>
+                        <label class="form--label">@lang('User Name')</label>
                         <input class="form-control form--control" name="firstname" type="text" value="{{ $user->firstname }}">
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="form-group">
-                        <label class="form--label">@lang('Last Name')</label>
+                        <label class="form--label">@lang('Father Name')</label>
                         <input class="form-control form--control" name="lastname" type="text" value="{{ $user->lastname }}">
                     </div>
                 </div>

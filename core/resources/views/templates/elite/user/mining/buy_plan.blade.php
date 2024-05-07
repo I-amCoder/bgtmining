@@ -13,7 +13,7 @@
                         <select id="payment_method" class="form-select">
                             <option value>Select Payment Method</option>
                             @if ($jazzcash)
-                                <option value="{{ json_encode($jazzcash) }}">Jazzcash</option>
+                                <option value="{{ json_encode($jazzcash) }}">USDT TRC-20</option>
                             @endif
                             @if ($easypaisa)
                                 <option value="{{ json_encode($easypaisa) }}">Easypaisa</option>
@@ -46,23 +46,31 @@
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Method Name</span>
-                        <span>${method.method_name}</span>
+                        <span>USDT TRC-20</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Method Charge</span>
                         <span>${method.charge}</span>
                     </li>
-            `;
-                Object.entries(method.details).forEach(detail => {
-                    let el = `
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span class="text-capitalize">${(detail[0].replace('_',' '))}</span>
-                        <span>${detail[1]}</span>
+                     <li class="list-group-item d-flex justify-content-between">
+                        <span>Method Network</span>
+                        <span>USDT TRC-20</span>
                     </li>
-                `;
-                    details += el;
-                });
-                details += `</ul>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span>Wallet Adress</span>
+                        <span>TRwkJ3Kifh4ufhvs9Errs5Awom5yWjq6ap</span>
+                    </li>
+            `;
+              // Object.entries(method.details).forEach(detail => {
+                 //   let el = `
+                //    <li class="list-group-item d-flex justify-content-between">
+                   //     <span class="text-capitalize">${(detail[0].replace('_',' '))}</span>
+              //          <span>${detail[1]}</span>
+              //      </li>
+            //    `;
+              //      details += el;
+            //    }); 
+              details += `</ul>
                 <form action="{{ route('user.mining.plans.buy', $plan->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input hidden name="method" value="${method.method_slug}" />

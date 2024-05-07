@@ -216,3 +216,125 @@
         </nav>
     </div>
 </header>
+ <nav class="nav1">
+<a href="{{ route('user.home') }}" class="nav-link1">
+<i class="las la-wallet fa-2x"></i> 
+<span class="nav-text">Wallet</span>
+</a>
+
+<a href="https://bgtmining.bitcoingoldtrading.com/user/coin-mining" class="nav-link1">
+<i class="las la-bolt fa-2x"></i> 
+<span class="nav-text">Mining</span>
+</a>
+<a href="https://bgtmining.bitcoingoldtrading.com/ads/buy/BGT/all" class="nav-link1">
+<i class="fas fa-exchange-alt fa-3x"></i>
+
+<span class="nav-text">P2P</span>
+</a>
+<a href="https://bgtmining.bitcoingoldtrading.com/user/referred/users" class="nav-link1">
+<i class="las la-users fa-2x"></i>
+
+<span class="nav-text" >Team</span>
+</a>
+<a href="https://bgtmining.bitcoingoldtrading.com/user/coin-mining/history" class="nav-link1">
+<i class="las la-chart-bar fa-2x"></i>
+
+<span class="nav-text" >Insights</span>
+</a>
+
+</nav>
+
+  <style>
+
+
+
+.nav1 {
+    color:black;
+position: fixed;
+bottom: 0;
+width: 100%;
+height: 55px;
+box-shadow: @ @ 3px rgbo(0, 0, 0, 0.2) ;
+background-color: #FCA122;
+overflow-x: auto;
+display: flex;
+  z-index: 99;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.nav-link1 {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+flex-grow: 1;
+min-width: 40px;
+overflow: hidden;
+white-space: nowrap;
+font-family: sans-serif;
+
+font-size: 14px;
+color: #ffffff;
+
+
+}
+.nav-link1:hover {
+color: #000000;
+}
+.nav-link1:active{
+color: #000000;
+}
+.nav-icont{
+font-size: 18px;
+}
+ @media  screen and (min-width: 600px) {
+  .nav1 {
+  display: none ;
+}
+section.banner-section.bg_img.overflow-hidden.mb-0 {
+  padding-top: 150px;
+
+}
+div.banner-thumb.ps-xl-5.ps-lg-4.d-lg-block.d-none {
+  margin-top: -140px;
+}
+}
+ @media  screen and (min-width: 350px) {
+  .nav-link1 {
+  font-size: 12px;
+  padding: 0px;
+  
+
+}
+}
+    .menu1 {
+  list-style-type: none;
+  margin: 5px;
+  padding: 1px;
+}
+
+.menu1 li {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.menu1 li a {
+  display: block;
+  padding: 1px;
+  text-decoration: none;
+  color: #002a47;
+ 
+}
+
+.menu1 li a:hover {
+    color: #1dbf73;
+}
+
+
+}
+
+
+   </style>

@@ -40,12 +40,13 @@
                             <a class="forgot" href="{{ route('user.password.request') }}">@lang('Forgot your password?')</a>
                         </div>
                     </form>
-                </div>
+                </div><br> <br>
                 <div class="account-footer login--page">
                     <p class="account-footer__text">
                         &copy; {{ date('Y') }}
                         <a href="{{ route('home') }}" class="text--base">
                             {{ __(gs('site_name')) }}
+                        
                         </a>
                         @lang('All Rights Reserved')
                     </p>
@@ -58,4 +59,6 @@
             </div>
         </div>
     </section>
+    <br>
+    <br>
 @endsection

@@ -10,8 +10,8 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div class="contact-heading">
-                        <h1 class="contact-heading__title" s-break="-3" s-color="base-two"> {{ __(@$content->data_values->heading) }} </h1>
-                        <p class="contact-heading__desc">{{ __(@$content->data_values->subheading) }}</p>
+                        <h1 class="contact-heading__title" s-break="-3" s-color="base-two"> Support Team </h1>
+                  <!--  <p class="contact-heading__desc">{{ __(@$content->data_values->subheading) }}</p>  -->
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xl-6 offset-xl-1 col-lg-6">
+         <!-- <div class="col-xl-6 offset-xl-1 col-lg-6">
                     <div class="contact-thumb">
                         <img alt="" src="{{ getImage('assets/images/frontend/contact/' . @$content->data_values->image, '615x430') }}">
                     </div>
@@ -68,7 +68,7 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

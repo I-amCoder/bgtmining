@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\CryptoCurrency;
 use App\Models\MiningHistory;
 use App\Models\MiningPlan;
+use App\Models\Advertisement;
 use App\Models\PaymentMethod;
+use App\Models\CommissionLog;
+use App\Models\Transaction;
 use App\Models\PlanDeposit;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class MiningController extends Controller
 {
@@ -21,11 +25,35 @@ class MiningController extends Controller
         return view($this->activeTemplate . 'user.mining.index', compact('pageTitle'));
     }
 
-    public function history()
+    public function history(Request $request)
     {
         $pageTitle = "BGT Mining History";
-        $records = MiningHistory::latest()->get();
-        return view($this->activeTemplate . 'user.mining.history', compact('pageTitle', 'records'));
+       $userId = auth()->id(); // Get the authenticated user's ID
+$records = MiningHistory::where('user_id', $userId)->latest()->get();
+   $remarks      = Transaction::distinct('remark')->whereNotNull('remark')->get('remark');
+        $transactions = Transaction::where('user_id',  $userId)->where('crypto_currency_id', '!=', null);
+
+        if ($request->search) {
+            $transactions = $transactions->where('trx', $request->search);
+        }
+
+        if ($request->type) {
+            $transactions = $transactions->where('trx_type', $request->type);
+        }
+
+        if ($request->crypto) {
+            $transactions = $transactions->where('crypto_currency_id', $request->crypto);
+        }
+
+        if ($request->remark) {
+            $transactions = $transactions->where('remark', $request->remark);
+        }
+
+        $transactions = $transactions->with(['crypto'])->orderBy('id', 'desc')->paginate(getPaginate());
+        $cryptos = CryptoCurrency::latest()->get();
+
+
+        return view($this->activeTemplate . 'user.mining.history', compact('pageTitle', 'records', 'transactions', 'cryptos', 'remarks'));
     }
 
     public function transfer(Request $request)

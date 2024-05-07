@@ -14,7 +14,7 @@
                                 Price: ${{ number_format($plan->price) }}
                             </li>
                             <li class="list-group-item">
-                                Daily Earning: ${{ number_format($plan->return_interest) }}
+                                Daily Earning: {{ number_format($plan->return_interest) }} BGT
                             </li>
                         </ul>
                     </div>

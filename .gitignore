@@ -2,3 +2,4 @@ core/vendor
 *.sql
 queries.md
 core/.env
+core/vendor.zip

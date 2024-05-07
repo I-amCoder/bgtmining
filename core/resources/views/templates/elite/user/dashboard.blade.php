@@ -41,65 +41,61 @@
                         </div>  -->
 
         @foreach ($wallets as $wallet)
-            <div class="col-xl-4 col-md-6 d-widget-item">
+            <div class="col-xl-4 col-md-6 col-sm-12 d-widget-item">
                 <a class="d-block" href="{{ route('user.transaction.index') }}?crypto={{ $wallet->cryptoId }}">
                     <div class="d-widget">
                         <div class="d-widget__icon">
                             <img src="{{ getImage($walletImage->path . '/' . $wallet->cryptoImage, $walletImage->size) }}">
                         </div>
                         <div class="d-widget__content">
-                            <p class="d-widget__caption">{{ __($wallet->cryptoCode) }} </p>
-                            <h2 class="d-widget__amount">{{ showAmount($wallet->balance, 2) }}</h2>
+                          
+                            <h2 class="d-widget__amount">{{ showAmount($wallet->balance, 2) }}  <small class="d-widget__caption">{{ __($wallet->cryptoCode) }} </small></h2>
                             <h6 class="d-widget__usd text--base">
                                 @lang('In USD') <i class="las la-arrow-right"></i>
                                 {{ showAmount($wallet->balanceInUsd) }}
                             </h6>
+                         <!--    <a class="d-block" href="{{ route('user.mining.history') }}">   <h6>Mining Balance</h6>  </a>
+                         
+                            <h5 class="d-widget__amount">{{ showAmount(auth()->user()->mining_balance, 2) }}  <small class="d-widget__caption">{{ __($wallet->cryptoCode) }} </small></h5> -->
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-xl-4 col-md-6 d-widget-item">
-                <a class="d-block" href="{{ route('user.mining.history') }}">
-                    <div class="d-widget">
-                        <div class="d-widget__icon">
-                            <img src="{{ getImage($walletImage->path . '/' . $wallet->cryptoImage, $walletImage->size) }}">
-                        </div>
-                        <div class="d-widget__content">
-                            <h5>Mining Balance</h5>
-                            <p class="d-widget__caption">{{ __($wallet->cryptoCode) }} </p>
-                            <h2 class="d-widget__amount">{{ showAmount(auth()->user()->mining_balance, 2) }}</h2>
-                        </div>
-                    </div>
-                </a>
-            </div>
+           
         @endforeach
     </div>
     <div class="container1">
-        <div class="row ">
-            <div class="col-3">
-                <i class="fas fa-money-bill pay1"></i>
-                <small>Deposit</small>
-            </div>
-            <div class="col-3">
-                <a class="dropdown-item dropdown-menu__link"
-                    href="https://bgtmining.bitcoingoldtrading.com/ads/buy/BGT/all"> <i
-                        class="fas fa-exchange-alt pay1"></i>
-                    <p>P2P</p>
-                </a>
-            </div>
-            <div class="col-3">
-                <i class="fas fa-credit-card pay1"></i>
-                <p>Pay</p>
-            </div>
-            <div class="col-3">
-                <i class="fas fa-hand-holding-usd pay1"></i>
-                <small>Withdraw</small>
-            </div>
-        </div>
+       <div class="row">
+    <div class="col-3">
+        <a class="" href="https://bgtmining.bitcoingoldtrading.com/ads/buy/BGT/all">
+            <i class="fas fa-money-bill pay1"></i>
+            <p>Buy</p>
+        </a>
+    </div>
+    <div class="col-3">
+        <a class="" href="https://bgtmining.bitcoingoldtrading.com/ads/buy/BGT/all">
+            <i class="fas fa-exchange-alt pay1"></i>
+            <p>P2P</p>
+        </a>
+    </div>
+    <div class="col-3">
+        <a class="" href="https://bgtmining.bitcoingoldtrading.com/user/transactions">
+            <i class="fas fa-credit-card pay1"></i>
+            <p>History</p>
+        </a>
+    </div>
+    <div class="col-3">
+        <a class="" href="https://bgtmining.bitcoingoldtrading.com/ads/sell/BGT/all/all/all/">
+            <i class="fas fa-hand-holding-usd pay1"></i>
+            <p>Sell</p>
+        </a>
+    </div>
+</div>
+
     </div>
 
 
-    <h4 class="mt-4">@lang('Latest Ads')</h4>
+    <h4 class="mt-4">@lang('Latest P2P Ads')</h4>
     @include($activeTemplate . 'partials.user_ads_table')
 @endsection
 
@@ -129,6 +125,13 @@
             font-size: 15px;
             margin-top: 5px;
         }
+/* Targeting the <a> tags specifically */
+.row a {
+    color: black; /* Set link color to black */
+    text-decoration: none; /* Remove underline from links */
+}
+
+
 
         .pay1 {
             margin-top: 15px;
