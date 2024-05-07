@@ -1,7 +1,22 @@
 <?php
 
-
+use App\Models\Wallet;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+
+Route::get('create-wallet-addresses', function () {
+    foreach (Wallet::all() as $wallet) {
+
+        $address = Str::random(100);
+        while (Wallet::where('wallet_address', $address)->exists()) {
+            $address = Str::random(100);
+        }
+
+        $wallet->wallet_address = $address;
+        $wallet->save();
+    }
+    echo "done";
+});
 
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');

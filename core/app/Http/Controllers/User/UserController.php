@@ -15,6 +15,9 @@ use App\Models\Transaction;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use LDAP\Result;
+use Vonage\Message\Wap;
 
 class UserController extends Controller
 {
@@ -26,7 +29,7 @@ class UserController extends Controller
         $pageTitle = 'Dashboard';
         $wallets   = Wallet::where('user_id', $user->id)
             ->leftJoin('crypto_currencies', 'crypto_currencies.id', '=', 'crypto_currency_id')
-            ->selectRaw("crypto_currencies.id as cryptoId, code as cryptoCode, balance, image as cryptoImage, (balance * crypto_currencies.rate) as balanceInUsd")
+            ->selectRaw("crypto_currencies.id as cryptoId, code as cryptoCode,wallet_address, balance, image as cryptoImage, (balance * crypto_currencies.rate) as balanceInUsd")
             ->orderByRaw("wallets.id desc")
             ->get();
         $totalAdd       = Advertisement::active()->where('user_id', $user->id)->count();
@@ -250,5 +253,40 @@ class UserController extends Controller
 
         $notify[] = ['success', 'Registration process completed successfully'];
         return to_route('user.home')->withNotify($notify);
+    }
+
+    public function mainWalletTransfer(Request $request)
+    {
+        $request->validate([
+            'wallet_address' => 'required|string|exists:wallets,wallet_address',
+            'transfer_amount' => 'required|numeric'
+        ]);
+
+        $to_wallet = Wallet::where('wallet_address', $request->wallet_address)->first();
+
+        if ($to_wallet->user_id == auth()->id()) {
+
+            // return back()->withNotify([['error','You cannot transfer to yourself']]);
+        }
+
+        $from_wallet = Wallet::where('user_id', auth()->id())->first();
+
+        if ($from_wallet) {
+            $from_wallet->balance -= $request->transfer_amount;
+            $to_wallet->balance += $request->transfer_amount;
+
+            try {
+                DB::beginTransaction();
+                $from_wallet->save();
+                $to_wallet->save();
+                DB::commit();
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                if (config('app.debug')) dd($th);
+            }
+
+            return back()->withNotify([['success', 'Balance Transferred Successfully']]);
+        }
+        return back()->withNotify([['error', 'Balance Transferred Error']]);
     }
 }

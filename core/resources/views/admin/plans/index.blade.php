@@ -72,7 +72,7 @@
                         </div>
                         <div class="form-group">
                             <label for="price" class="form-label">Plan Price</label>
-                            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price"
+                            <input type="number" step="any" class="form-control @error('price') is-invalid @enderror" name="price"
                                 id="price" required placeholder="Plan Price">
                             @error('price')
                                 <p class="text-danger">{{ $message }}</p>
@@ -81,7 +81,7 @@
 
                         <div class="form-group">
                             <label for="return_interest" class="form-label">Daily Mining</label>
-                            <input type="number" class="form-control @error('return_interest') is-invalid @enderror"
+                            <input type="number" step="any" class="form-control @error('return_interest') is-invalid @enderror"
                                 name="return_interest" id="return_interest" required placeholder="Return Interest">
                             @error('return_interest')
                                 <p class="text-danger">{{ $message }}</p>
