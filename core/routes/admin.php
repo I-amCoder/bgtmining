@@ -343,3 +343,4 @@ Route::middleware('admin')->group(function () {
         Route::put('/update/{method}', 'update')->name('update');
     });
 });
+//
