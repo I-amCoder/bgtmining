@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 Route::get('create-wallet-addresses', function () {
+    abort(404);
     foreach (Wallet::all() as $wallet) {
 
         $address = Str::random(100);
@@ -13,7 +14,7 @@ Route::get('create-wallet-addresses', function () {
         }
 
         $wallet->wallet_address = $address;
-        $wallet->save();
+        // $wallet->save();
     }
     echo "done";
 });

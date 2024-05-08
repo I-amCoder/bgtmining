@@ -34,6 +34,11 @@ class PlanDepositController extends Controller
             DB::beginTransaction();
             $deposit->save();
             $user->save();
+            $general = gs();
+            if ($general->deposit_commission) {
+                levelCommission($user, $deposit->amount, "BGT", "-", 'deposit');
+            }
+
             DB::commit();
         } catch (\Throwable $th) {
             if (config('app.debug')) dd($th->getMessage());

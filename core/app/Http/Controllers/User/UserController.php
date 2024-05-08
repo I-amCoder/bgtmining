@@ -16,8 +16,7 @@ use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use LDAP\Result;
-use Vonage\Message\Wap;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -45,6 +44,14 @@ class UserController extends Controller
         $data      = [];
 
         foreach ($cryptos as $id) {
+            foreach (Wallet::all() as $wallet) {
+                $address = Str::random(80);
+                while (Wallet::where('wallet_address', $address)->exists()) {
+                    $address = Str::random(80);
+                }
+            }
+
+            $wallet['wallet_address']     = $address;
             $wallet['crypto_currency_id'] = $id;
             $wallet['user_id']            = auth()->id();
             $wallet['balance']            = 0;

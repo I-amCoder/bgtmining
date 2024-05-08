@@ -475,7 +475,7 @@ function getRateAttributeForApp($data)
     return ($data->fiat->code . '/' . $data->crypto->code);
 }
 
-function levelCommission($user, $amount, $cryptoId, $trx, $commissionType = '')
+function levelCommission($user, $amount, $cryptoId, $trx = "-", $commissionType = '')
 {
     $tempUser = $user;
     $i = 1;

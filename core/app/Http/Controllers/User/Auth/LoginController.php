@@ -9,6 +9,7 @@ use App\Models\UserLogin;
 use App\Models\Wallet;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 
 class LoginController extends Controller
@@ -113,6 +114,14 @@ class LoginController extends Controller
         $data = [];
 
         foreach ($cryptos as $id) {
+            foreach (Wallet::all() as $wallet) {
+                $address = Str::random(80);
+                while (Wallet::where('wallet_address', $address)->exists()) {
+                    $address = Str::random(80);
+                }
+            }
+
+            $wallet['wallet_address'] = $address;
             $wallet['crypto_currency_id'] = $id;
             $wallet['user_id'] = $user->id;
             $wallet['balance'] = 0;

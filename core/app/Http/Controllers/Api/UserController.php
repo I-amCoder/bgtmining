@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -105,11 +106,21 @@ class UserController extends Controller
 
     protected function insertNewCryptoWallets()
     {
+
         $walletId  = Wallet::where('user_id', auth()->id())->pluck('crypto_currency_id');
         $cryptos   = CryptoCurrency::latest()->whereNotIn('id', $walletId)->pluck('id');
         $data      = [];
 
         foreach ($cryptos as $id) {
+
+            foreach (Wallet::all() as $wallet) {
+                $address = Str::random(80);
+                while (Wallet::where('wallet_address', $address)->exists()) {
+                    $address = Str::random(80);
+                }
+            }
+
+            $wallet['wallet_address']            = $address;
             $wallet['crypto_currency_id'] = $id;
             $wallet['user_id']            = auth()->id();
             $wallet['balance']            = 0;
