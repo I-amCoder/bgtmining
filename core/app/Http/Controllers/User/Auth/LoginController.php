@@ -39,8 +39,8 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        if(!verifyCaptcha()){
-            $notify[] = ['error','Invalid captcha provided'];
+        if (!verifyCaptcha()) {
+            $notify[] = ['error', 'Invalid captcha provided'];
             return back()->withNotify($notify);
         }
 
@@ -87,7 +87,6 @@ class LoginController extends Controller
             $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
-
     }
 
     public function logout()
@@ -114,12 +113,12 @@ class LoginController extends Controller
         $data = [];
 
         foreach ($cryptos as $id) {
-            foreach (Wallet::all() as $wallet) {
+
+            $address = Str::random(80);
+            while (Wallet::where('wallet_address', $address)->exists()) {
                 $address = Str::random(80);
-                while (Wallet::where('wallet_address', $address)->exists()) {
-                    $address = Str::random(80);
-                }
             }
+
 
             $wallet['wallet_address'] = $address;
             $wallet['crypto_currency_id'] = $id;
@@ -128,12 +127,12 @@ class LoginController extends Controller
             $data[] = $wallet;
         }
 
-        if(!empty($data)){
+        if (!empty($data)) {
             Wallet::insert($data);
         }
 
         $ip = getRealIP();
-        $exist = UserLogin::where('user_ip',$ip)->first();
+        $exist = UserLogin::where('user_ip', $ip)->first();
         $userLogin = new UserLogin();
         if ($exist) {
             $userLogin->longitude =  $exist->longitude;
@@ -141,12 +140,12 @@ class LoginController extends Controller
             $userLogin->city =  $exist->city;
             $userLogin->country_code = $exist->country_code;
             $userLogin->country =  $exist->country;
-        }else{
+        } else {
             $info = json_decode(json_encode(getIpInfo()), true);
-            $userLogin->longitude =  @implode(',',$info['long']);
-            $userLogin->latitude =  @implode(',',$info['lat']);
-            $userLogin->city =  @implode(',',$info['city']);
-            $userLogin->country_code = @implode(',',$info['code']);
+            $userLogin->longitude =  @implode(',', $info['long']);
+            $userLogin->latitude =  @implode(',', $info['lat']);
+            $userLogin->city =  @implode(',', $info['city']);
+            $userLogin->country_code = @implode(',', $info['code']);
             $userLogin->country =  @implode(',', $info['country']);
         }
 
@@ -160,6 +159,4 @@ class LoginController extends Controller
 
         return to_route('user.home');
     }
-
-
 }

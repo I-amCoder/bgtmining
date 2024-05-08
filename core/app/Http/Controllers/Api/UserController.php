@@ -106,7 +106,6 @@ class UserController extends Controller
 
     protected function insertNewCryptoWallets()
     {
-
         $walletId  = Wallet::where('user_id', auth()->id())->pluck('crypto_currency_id');
         $cryptos   = CryptoCurrency::latest()->whereNotIn('id', $walletId)->pluck('id');
         $data      = [];

@@ -44,11 +44,9 @@ class UserController extends Controller
         $data      = [];
 
         foreach ($cryptos as $id) {
-            foreach (Wallet::all() as $wallet) {
+            $address = Str::random(80);
+            while (Wallet::where('wallet_address', $address)->exists()) {
                 $address = Str::random(80);
-                while (Wallet::where('wallet_address', $address)->exists()) {
-                    $address = Str::random(80);
-                }
             }
 
             $wallet['wallet_address']     = $address;
