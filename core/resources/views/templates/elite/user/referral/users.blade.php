@@ -48,6 +48,24 @@
 
 @push('script')
     <script>
+     $(document).ready(function() {
+        // Function to copy text to clipboard
+        function copyToClipboard(text) {
+            var input = document.createElement("textarea");
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
+        }
+
+        // When the copy button is clicked
+        $("#copyBoard").click(function() {
+            var textToCopy = $("#key").val();
+            copyToClipboard(textToCopy);
+            alert("Copied to clipboard!");
+        });
+    });
         (function($) {
             "use strict"
             $('.treeview').treeView();

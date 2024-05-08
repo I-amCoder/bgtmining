@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Lib\FormProcessor;
+use App\Models\PlanDeposit;
 use App\Lib\GoogleAuthenticator;
 use App\Models\Advertisement;
 use App\Models\CommissionLog;
@@ -64,16 +65,12 @@ class UserController extends Controller
     public function depositHistory()
     {
         $pageTitle = 'Deposit History';
-        $deposits  = auth()->user()->deposits()->searchable(['trx'])->where('user_id', auth()->id());
+      
+ $userId = auth()->id(); // Get the authenticated user's ID
+$deposits = PlanDeposit::where('user_id', $userId)->latest()->get();
+      
 
-        if (request()->crypto) {
-            $deposits = $deposits->where('crypto_currency_id', request()->crypto);
-        }
-
-        $deposits = $deposits->with(['crypto'])->orderBy('id', 'desc')->paginate(getPaginate());
-        $cryptos = CryptoCurrency::orderBy('code')->get();
-
-        return view($this->activeTemplate . 'user.deposit_history', compact('pageTitle', 'deposits', 'cryptos'));
+        return view($this->activeTemplate . 'user.deposit_history', compact('pageTitle', 'deposits'));
     }
 
 

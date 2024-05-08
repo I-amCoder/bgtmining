@@ -49,12 +49,12 @@
                 <span class="text">P2P Exchange Ads</span>
             </a>
         </li>
-        <li class="sidebar-menu-list__item {{ menuActive('user.withdraw.history') }}">
+      <!--  <li class="sidebar-menu-list__item {{ menuActive('user.withdraw.history') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.withdraw.history') }}">
 
                 <span class="text"><i class="las la-hand-holding-usd"></i> Withdraw History</span>
             </a>
-        </li>
+        </li> -->
         <li class="sidebar-menu-list__item {{ menuActive('user.deposit.history') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.deposit.history') }}">
 

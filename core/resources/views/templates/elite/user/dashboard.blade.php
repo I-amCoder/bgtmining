@@ -63,10 +63,15 @@
                 </a>
             </div>
             <div class="col-12">
-                <p class="bg-white p-2 rounded-1 text-info">{{ $wallet->wallet_address }}</p>
-                <button class="btn btn-info transferBalance">
+                <div class="input-group">
+               <br> <input class="form-control form--control bg-white" id="key" name="key" readonly=""
+    type="text" value="{{ $wallet->wallet_address }}">
+<button class="input-group-text bg--base-two text-white border-0 copyBtn" id="copyBoard">
+    <i class="lar la-copy"></i>
+</button> </div>
+          <!--      <button class="btn btn-info transferBalance">
                     Transfer
-                </button>
+                </button>  -->
             </div>
         @endforeach
     </div>
@@ -92,8 +97,8 @@
             </div>
             <div class="col-3">
                 <a class="" href="https://bgtmining.bitcoingoldtrading.com/ads/sell/BGT/all/all/all/">
-                    <i class="fas fa-hand-holding-usd pay1"></i>
-                    <p>Sell</p>
+                    <i class="fas fa-hand-holding-usd pay1 transferBalance"></i>
+                    <p>withdraw</p>
                 </a>
             </div>
         </div>
@@ -128,7 +133,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-danger">Send</button>
                     </div>
                 </form>
             </div>
@@ -138,6 +143,24 @@
 
 @push('script')
     <script>
+     $(document).ready(function() {
+        // Function to copy text to clipboard
+        function copyToClipboard(text) {
+            var input = document.createElement("textarea");
+            input.value = text;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand("copy");
+            document.body.removeChild(input);
+        }
+
+        // When the copy button is clicked
+        $("#copyBoard").click(function() {
+            var textToCopy = $("#key").val();
+            copyToClipboard(textToCopy);
+            alert("Copied to clipboard!");
+        });
+    });
         (function($) {
             "use strict";
 
@@ -193,6 +216,8 @@
         .container1 {
             text-align: center;
             padding: 5px;
+            background-color: #ffffff;
+            border-radius: 20px;
         }
 
         .container {
