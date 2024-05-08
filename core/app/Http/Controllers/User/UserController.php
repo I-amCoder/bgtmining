@@ -65,10 +65,10 @@ class UserController extends Controller
     public function depositHistory()
     {
         $pageTitle = 'Deposit History';
-      
- $userId = auth()->id(); // Get the authenticated user's ID
-$deposits = PlanDeposit::where('user_id', $userId)->latest()->get();
-      
+
+        $userId = auth()->id(); // Get the authenticated user's ID
+        $deposits = PlanDeposit::where('user_id', $userId)->latest()->get();
+
 
         return view($this->activeTemplate . 'user.deposit_history', compact('pageTitle', 'deposits'));
     }
@@ -265,13 +265,16 @@ $deposits = PlanDeposit::where('user_id', $userId)->latest()->get();
         ]);
 
         $to_wallet = Wallet::where('wallet_address', $request->wallet_address)->first();
+        $from_wallet = Wallet::where('user_id', auth()->id())->first();
 
         if ($to_wallet->user_id == auth()->id()) {
-
-            // return back()->withNotify([['error','You cannot transfer to yourself']]);
+            return back()->withNotify([['error', 'You cannot transfer to yourself']]);
         }
 
-        $from_wallet = Wallet::where('user_id', auth()->id())->first();
+        if ($request->transfer_amount > $from_wallet->balance) {
+            return back()->withNotify([['error', 'Insufficient Balance']]);
+        }
+
 
         if ($from_wallet) {
             $from_wallet->balance -= $request->transfer_amount;
