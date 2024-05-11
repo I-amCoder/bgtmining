@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CryptoCurrency;
 use App\Models\PlanDeposit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PlanDepositController extends Controller
 {
@@ -37,7 +37,7 @@ class PlanDepositController extends Controller
             $user->save();
             $general = gs();
             if ($general->deposit_commission) {
-                levelCommission($user, $deposit->amount, CryptoCurrency::where('symbol', 'BGT')->first()->id, "-", 'deposit', true);
+                levelCommission($user, $deposit->amount, CryptoCurrency::where('symbol', 'BGT')->first()->id, strtoupper(Str::random(11)), 'deposit', true);
             }
             DB::commit();
         } catch (\Throwable $th) {
