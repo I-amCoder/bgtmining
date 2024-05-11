@@ -83,13 +83,13 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-sm-4">
+                 <!--   <div class="col-xl-2 col-sm-4">
                         <div class="form-group">
                             <select class="select form--control" name="fiat_currency">
                                 <option selected disabled>@lang('Select Currency')</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-xl-2  col-sm-4">
                         <div class="form-group">
                             <select class="select form--control" name="location">

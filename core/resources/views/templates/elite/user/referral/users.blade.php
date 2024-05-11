@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.master_with_menu')
 @section('content')
-<div class="col-xl-12 col-lg-12 col-md-12">
+<div class="col-xl-12 col-lg-12 col-md-12 container1">
             <h5 class="title">@lang('Referral Link')</h5>
             <div class="input-group">
                 <input class="form-control form--control bg-white" id="key" name="key" readonly=""
@@ -11,7 +11,7 @@
             </div>
         </div>
     @if ($user->refBy)
-        <div class="d-flex flex-wrap justify-content-center">
+        <div class="d-flex flex-wrap justify-content-center container1">
             <h5><span class="mb-2">@lang('You are referred by')</span> <span><a class="text--base" href="{{ route('public.profile', $user->refBy->username) }}">{{ $user->refBy->username }}</a></span></h5>
         </div>
     @endif

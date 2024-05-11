@@ -98,17 +98,17 @@
             <div class="col-3">
                 <a class="" href="https://bgtmining.bitcoingoldtrading.com/ads/sell/BGT/all/all/all/">
                     <i class="fas fa-hand-holding-usd pay1 transferBalance"></i>
-                    <p>withdraw</p>
+                    <small>Withdraw</small>
                 </a>
             </div>
         </div>
 
     </div>
-
+<div class="container1">
 
     <h4 class="mt-4">@lang('Latest P2P Ads')</h4>
     @include($activeTemplate . 'partials.user_ads_table')
-
+</div>
 
     <div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -215,13 +215,13 @@
 
         .container1 {
             text-align: center;
-            padding: 5px;
+            padding: 1px;
             background-color: #ffffff;
-            border-radius: 20px;
+            border-radius: 10px;
         }
 
         .container {
-            text-align: right;
+            text-align: left;
         }
     </style>
 @endpush

@@ -37,41 +37,48 @@ switch ($planId) {
         break;
     case 18:
         $planName = 'Level 1';
-        $earn= '2';
+        $earn= '6';
         break;
     case 19:
         $planName = 'Level 2';
-        $earn= '4';
+        $earn= '12';
         break;
         case 20:
         $planName = 'Level 3';
-        $earn= '6';
+        $earn= '30';
         break;
         case 21:
         $planName = 'Level 4';
-        $earn= '13';
+        $earn= '60';
         break;
         case 22:
         $planName = 'Level 5';
-        $earn= '30';
+        $earn= '120';
         break;
         case 23:
         $planName = 'Level 6';
-        $earn= '70';
+        $earn= '300';
         break;
           case 24:
         $planName = 'Level 7';
-        $earn= '150';
+        $earn= '600';
         break;
           case 25:
         $planName = 'Level 8';
-        $earn= '800';
+        $earn= '1200';
         break;
           case 26:
         $planName = 'Level 9';
-        $earn= '2000';
+        $earn= '3000';
         break;
-         
+          case 27:
+        $planName = 'Level 9';
+        $earn= '6000';
+        break;
+         case 28:
+        $planName = 'Level 9';
+        $earn= '12000';
+        break;
     default:
         $planName = 'Free Plan';
         $earn= '1';

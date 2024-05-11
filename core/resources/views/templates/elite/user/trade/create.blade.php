@@ -55,8 +55,16 @@
                     <span class="caption">@lang('Avg. Trade Speed')</span>
                     <span class="value">{{ avgTradeSpeed($ad) }}</span>
                 </li>
-            </ul><!-- trade-request-details-list end -->
-
+            </ul><!-- trade-request-details-list end --> <hr>
+ <div class="terms-sidebar__widget">
+                    <h6 class="title"><i class="las la-file-invoice"></i> @lang('Terms of This Trade')</h6>
+                    <p>{{ __($ad->terms) }}</p>
+                </div>
+                <div class="terms-sidebar__widget">
+                    <h6 class="title"><i class="las la-file-invoice-dollar"></i>
+                        @lang('Payment details of This Trade')</h6>
+                    <p>{{ __($ad->details) }}</p>
+                </div>
             <form action="{{ route('user.trade.request.store', $ad->id) }}" class="trade-request-form mt-5" method="POST">
                 @csrf
                 <h3 class="mb-3 text-center">@lang('How much you wish to')
@@ -90,7 +98,7 @@
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <textarea class="form--control mt-3" name="details" placeholder="@lang('Write your contact message and other information for the trade here')..." required></textarea>
+                            <textarea class="form--control mt-3" name="details" placeholder="@lang('Write your contact message and other Payment information for the trade here')..." required></textarea>
                             <small class="text--danger"><i class="fas fa-info"></i> @lang('Remember to write about your convenient payment methods in the message').
                             </small>
                         </div>
@@ -175,15 +183,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="terms-sidebar__widget">
-                    <h6 class="title"><i class="las la-file-invoice"></i> @lang('Terms of This Trade')</h6>
-                    <p>{{ __($ad->terms) }}</p>
-                </div>
-                <div class="terms-sidebar__widget">
-                    <h6 class="title"><i class="las la-file-invoice-dollar"></i>
-                        @lang('Payment details of This Trade')</h6>
-                    <p>{{ __($ad->details) }}</p>
-                </div>
+               
             </div>
         </div>
         <div class="col-12">

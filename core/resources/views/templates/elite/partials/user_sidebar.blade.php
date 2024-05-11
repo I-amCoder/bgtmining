@@ -9,13 +9,13 @@
         </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.mining.show') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.mining.show') }}">
-                <span class="icon"><i class="lab la-bitcoin"></i></span>
+                <span class="icon"><i class="fas fa-bolt"></i></span>
                 <span class="text">@lang('Mining')</span>
             </a>
         </li>
         <li class="sidebar-menu-list__item {{ menuActive('user.mining.history') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.mining.history') }}">
-                <span class="icon"><i class="lab la-bitcoin"></i></span>
+                <span class="icon"><i class="las la-coins"></i></span>
                 <span class="text">@lang('Mining History')</span>
             </a>
         </li>
@@ -48,13 +48,18 @@
                 <span class="icon"><i class="lab la-adversal"></i></span>
                 <span class="text">P2P Exchange Ads</span>
             </a>
-        </li>
-      <!--  <li class="sidebar-menu-list__item {{ menuActive('user.withdraw.history') }}">
-            <a class="sidebar-menu-list__link" href="{{ route('user.withdraw.history') }}">
+    <li class="sidebar-menu-list__item">
+                                    <a class="dropdown-item dropdown-menu__link" href="{{ route('user.trade.request.running') }}">@lang('Running ')</a>
+                                </li>
+                                <li class="sidebar-menu-list__item">
+                                    <a class="dropdown-item dropdown-menu__link" href="{{ route('user.trade.request.completed') }}">@lang('Completed')</a>
+                                </li>
+       <li class="sidebar-menu-list__item {{ menuActive('user.withdraw.history') }}">
+            <a class="sidebar-menu-list__link" href="https://bitcoingoldtrading.com/">
 
-                <span class="text"><i class="las la-hand-holding-usd"></i> Withdraw History</span>
+                <span class="text"><i class="las la-scroll"></i> White paper</span>
             </a>
-        </li> -->
+        </li> 
         <li class="sidebar-menu-list__item {{ menuActive('user.deposit.history') }}">
             <a class="sidebar-menu-list__link" href="{{ route('user.deposit.history') }}">
 
@@ -111,9 +116,19 @@ body {
     background-image: url('{{ getImage('assets/images/frontend/banner/' . @$content->data_values->image, '515x295') }}');
     background-size: cover; /* Adjust as needed */
     background-position: center; /* Adjust as needed */
-    /* Other styles for the body */
+    position: relative; /* Required for positioning the overlay */
 }
 
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black color with 20% opacity */
+    z-index: -1; /* Ensure the overlay is behind the content */
+}
 
 
      

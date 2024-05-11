@@ -32,6 +32,43 @@
             </div>
         </div>
     </div>
+     <div class="row gy-4">
+       
+            <div class="col-lg-12">
+                <div class="ptable-wrapper">
+                    <table class="table table--responsive--lg">
+                        <thead>
+                            <tr>
+                                <th>@lang('User name')</th>
+                              
+                                <th>@lang('MINING PLAN')</th>
+                                <th>@lang('Amount')</th>
+                                <th>@lang('Status')</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                           @forelse ($deposits  as $deposit)
+                             
+                                
+                                    <tr>
+                                        <td>{{ $deposit->user->username }}</td>
+                                       
+                                        <td>{{ $deposit->plan->plan_name }}</td>
+                                        <td>{{ $deposit->amount }}</td>
+                                       
+                                        <td>{{ $deposit->status }}</td>
+                                </tr>
+                                  @empty
+                                    <tr>
+                                        <td colspan="100">Currently you don't have any plans</td>
+                                    </tr>
+                           @endforelse
+                        </tbody>
+                    </table>
+              
+        </div>
+    </div>
 @endsection
 
 @push('script')
@@ -50,16 +87,13 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Method Charge</span>
-                        <span>${method.charge}</span>
+                        <span>${method.charge}$</span>
                     </li>
                      <li class="list-group-item d-flex justify-content-between">
                         <span>Method Network</span>
-                        <span>USDT TRC-20</span>
+                        <span> TRC-20</span>
                     </li>
-                      <li class="list-group-item d-flex justify-content-between">
-                        <span>Wallet Adress</span>
-                        <span>TRwkJ3Kifh4ufhvs9Errs5Awom5yWjq6ap</span>
-                    </li>
+                    
             `;
               // Object.entries(method.details).forEach(detail => {
                  //   let el = `
@@ -71,6 +105,18 @@
               //      details += el;
             //    }); 
               details += `</ul>
+               <div class="col-12">
+                 <span>Wallet address</span>
+                <div class="input-group">
+               <br> <input class="form-control form--control bg-white" id="key" name="key" readonly=""
+    type="text" value="TRwkJ3Kifh4ufhvs9Errs5Awom5yWjq6ap">
+<button class="input-group-text bg--base-two text-white border-0 copyBtn" id="copyBoard">
+    <i class="lar la-copy"></i>
+</button> </div>
+          <!--      <button class="btn btn-info transferBalance">
+                    Transfer
+                </button>  -->
+            </div>
                 <form action="{{ route('user.mining.plans.buy', $plan->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input hidden name="method" value="${method.method_slug}" />
@@ -83,6 +129,19 @@
                 `
 
                 $("#method_details").html(details);
+                 // Copy wallet address to clipboard
+            $("#copyBoard").click(function() {
+                var walletAddress = $("#key").val();
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(walletAddress).then(function() {
+                        // Success message
+                        alert("Wallet address copied to clipboard!");
+                    }, function(err) {
+                        // Error message
+                        console.error('Could not copy text: ', err);
+                    });
+                }
+            });
             } else {
                 $("#method_details").html("");
             }

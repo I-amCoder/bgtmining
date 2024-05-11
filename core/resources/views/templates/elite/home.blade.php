@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="banner-thumb">
-                    <img alt="Banner Thumb" src="{{ getImage('assets/images/frontend/banner/' . @$content->data_values->image, '515x295') }}">
+               <!-- <div class="banner-thumb">
+                    <img alt="Banner Thumb" src="{{ getImage('assets/images/frontend/banner/' . @$content->data_values->image, '515x295') }}"> -->
                 </div>
             </div>
         </div>

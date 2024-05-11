@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.master_with_menu')
 @section('content')
-    <div class="row">
+    <div class="row container1">
         <div class="col-lg-12">
             <form action="" class="ptable-filter align-items-end" id="searchForm" method="GET">
                 <div class="d-flex gap-3 flex-wrap align-items-end justify-content-center">

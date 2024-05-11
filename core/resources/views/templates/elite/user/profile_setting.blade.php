@@ -1,6 +1,6 @@
 @extends($activeTemplate . 'layouts.master_with_menu')
 @section('content')
-    <div class="ac-setting-content">
+    <div class="ac-setting-content container1">
         <div class="author">
             <div class="author__thumb">
                 <img alt="" class="user_image" src="{{ getImage(getFilePath('userProfile') . '/' . @$user->image, getFileSize('userProfile')) }}">

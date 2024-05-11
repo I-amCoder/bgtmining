@@ -336,5 +336,4 @@ div.banner-thumb.ps-xl-5.ps-lg-4.d-lg-block.d-none {
 
 }
 
-
    </style>

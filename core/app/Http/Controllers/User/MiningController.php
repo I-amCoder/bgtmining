@@ -101,6 +101,8 @@ $records = MiningHistory::where('user_id', $userId)->latest()->get();
 
         $pageTitle = "Buy Plan";
         $plan = MiningPlan::findOrFail($id);
+           $userId = auth()->id(); // Get the authenticated user's ID
+        $deposits = PlanDeposit::where('user_id', $userId)->latest()->get();
 
         if (auth()->user()->plan_id == $id) {
             return to_route('user.mining.plans')->withNotify([['error', 'You\'ve already subscribed to this plan']]);
@@ -110,7 +112,7 @@ $records = MiningHistory::where('user_id', $userId)->latest()->get();
         $easypaisa = PaymentMethod::where('status', 1)->where('method_slug', 'easypaisa')->first();
         $bank = PaymentMethod::where('status', 1)->where('method_slug', 'bank')->first();
 
-        return view($this->activeTemplate . 'user.mining.buy_plan', compact('pageTitle', 'plan', 'jazzcash', 'easypaisa', 'bank'));
+        return view($this->activeTemplate . 'user.mining.buy_plan', compact('pageTitle', 'plan', 'deposits','jazzcash', 'easypaisa', 'bank'));
     }
 
     public function buyPlanProcess(Request $request, $id)

@@ -24,3 +24,15 @@
         @include($activeTemplate . 'partials.footer')
     @endif
 @endsection
+@push('style')
+    <style>
+       
+        .container1 {
+            text-align: center;
+            padding: 1px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+    </style>
+@endpush

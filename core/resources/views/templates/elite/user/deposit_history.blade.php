@@ -8,7 +8,7 @@
                         <thead>
                             <tr>
                                 <th>@lang('User name')</th>
-                                <th>@lang('Eamil')</th>
+                              
                                 <th>@lang('MINING PLAN')</th>
                                 <th>@lang('Amount')</th>
                                 <th>@lang('Status')</th>
@@ -21,7 +21,7 @@
                                 
                                     <tr>
                                         <td>{{ $deposit->user->username }}</td>
-                                        <td>{{ $deposit->user->email }}</td>
+                                       
                                         <td>{{ $deposit->plan->plan_name }}</td>
                                         <td>{{ $deposit->amount }}</td>
                                        
