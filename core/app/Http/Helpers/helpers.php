@@ -12,6 +12,7 @@ use App\Lib\CurlRequest;
 use App\Lib\FileManager;
 use App\Models\Advertisement;
 use App\Models\CommissionLog;
+use App\Models\CryptoCurrency;
 use App\Models\Referral;
 use App\Models\Transaction;
 use App\Models\Wallet;
@@ -475,12 +476,11 @@ function getRateAttributeForApp($data)
     return ($data->fiat->code . '/' . $data->crypto->code);
 }
 
-function levelCommission($user, $amount, $cryptoId, $trx = "-", $commissionType = '')
+function levelCommission($user, $amount, $cryptoId, $trx = "-", $commissionType = '', $usd = false)
 {
     $tempUser = $user;
     $i = 1;
     $level = Referral::where('commission_type', $commissionType)->count();
-
     while ($i <= $level) {
         $referer = $tempUser->refBy;
 
@@ -496,6 +496,14 @@ function levelCommission($user, $amount, $cryptoId, $trx = "-", $commissionType 
         }
 
         $commissionAmount = ($amount * $commission->percent) / 100;
+
+        if ($usd) {
+            $crypto = CryptoCurrency::find($cryptoId);
+            if(!$crypto){
+                return;
+            }
+            $commissionAmount *= $crypto->rate;
+        }
 
         $userWallet->balance += $commissionAmount;
         $userWallet->save();
